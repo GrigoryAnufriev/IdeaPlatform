@@ -39,10 +39,18 @@ public class Calculate {
                                         it.getArrival_date(), it.getArrival_time()));
         }
 
-        minutes.sort((o1, o2) -> (int) (o2 - o1));
-        int index = (int) Math.ceil(percentile / 100 * dateTimeOfFlight.size());
-        long res = minutes.get(index);
+        minutes.sort((o1, o2) -> (int) (o1 - o2));
 
-        return (int) res / 60 + ":" + ((int) res - (((int) res / 60) * 60));
+        int countTimes = 0;
+        for (long res : minutes){
+            double per = 100.0 * (++countTimes) / minutes.size();
+            if (percentile <= per) {
+                return (int) res / 60 + ":" + ((int) res - (((int) res / 60) * 60));
+            }
+
+        }
+
+        return "None";
+
     }
 }
