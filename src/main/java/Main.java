@@ -9,7 +9,8 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Tickets tickets = Parser.parseTickets();
+        Parser parser = new Parser();
+        Tickets tickets = parser.parseTickets();
 
         if (tickets != null) {
             List<DateTimeOfFlight> dfList = new ArrayList<>();
@@ -25,8 +26,8 @@ public class Main {
 
             }
             Calculate calculate = new Calculate();
-            System.out.println(calculate.avgTime(dfList));
-            System.out.println(calculate.percentileTime(dfList, 90));
+            System.out.println("Average time " + calculate.avgTime(dfList));
+            System.out.println("Percentile " + calculate.percentileTime(dfList, 90));
 
         }
 
